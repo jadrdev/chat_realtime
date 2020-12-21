@@ -1,16 +1,20 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
-import { Text, Button } from 'native-base';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { Container } from 'native-base';
+import Login from './src/screens/Login';
+import Chat from './src/screens/Chat';
 
 export default function App() {
+  const [userName, setUserName] = useState(null);
   return (
-    <SafeAreaView>
-      <Text>Hola Mundo</Text>
-      <Button>
-        <Text>Pulsar</Text>
-      </Button>
-    </SafeAreaView>
+    <Container style={styles.container}>
+      {!userName ? <Login setUserName={setUserName} /> : <Chat />}
+    </Container>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#16202b',
+  },
+});
