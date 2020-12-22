@@ -8,7 +8,11 @@ export default function App() {
   const [userName, setUserName] = useState(null);
   return (
     <Container style={styles.container}>
-      {!userName ? <Login setUserName={setUserName} /> : <Chat />}
+      {!userName ? (
+        <Login setUserName={setUserName} />
+      ) : (
+        <Chat userName={userName} />
+      )}
     </Container>
   );
 }

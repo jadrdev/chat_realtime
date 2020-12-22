@@ -6,6 +6,13 @@ export default function Input(props) {
   const { sendMessage } = props;
   const [message, setmessage] = useState('');
 
+  const onsubmit = () => {
+    if (message.length > 0) {
+      sendMessage(message);
+      setmessage('');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Item style={styles.itemInput}>
@@ -13,8 +20,10 @@ export default function Input(props) {
           placeholder="Mensaje"
           style={styles.Input}
           placeholderTextColor="grey"
+          value={message}
+          onChange={(e) => setmessage(e.nativeEvent.text)}
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onsubmit}>
           <Icon name="send" style={styles.Iconsend} type="FontAwesome" />
         </TouchableOpacity>
       </Item>
