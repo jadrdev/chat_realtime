@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Header, Body, Title } from 'native-base';
-import Input from '../components/input';
-import Message from '../components/message';
+import Input from '../components/Input';
+import Message from '../components/Message';
 import firebase from '../utils/firebase';
 import 'firebase/database';
 import moment from 'moment';
@@ -15,10 +15,11 @@ export default function Chat(props) {
 
   useEffect(() => {
     const chat = firebase.database().ref('general');
+    //capturamos toda la base de datos
     chat.on('value', (snapshot) => {
-      console.log(snapshot.val());
+      setMessages(snapshot.val());
     });
-  }, []);
+  });
 
   const time = moment().format('hh:mm a');
   const sendMessage = (message) => {
@@ -32,9 +33,9 @@ export default function Chat(props) {
         </Body>
       </Header>
       <View style={styles.content}>
-        <ScrollView>
+        <ScrollView style={styles.chatView}>
           {map(messages, (message, index) => (
-            <Message key={index} message={message} userName={userName} />
+            <Message key={index} message={message} name={userName} />
           ))}
         </ScrollView>
         <Input sendMessage={sendMessage} />
@@ -50,5 +51,8 @@ const styles = StyleSheet.create({
   },
   Header: {
     backgroundColor: '#16202b',
+  },
+  chatView: {
+    backgroundColor: '#1b273a',
   },
 });
