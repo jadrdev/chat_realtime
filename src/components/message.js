@@ -9,11 +9,20 @@ export default function message(props) {
 
   const thisIsMe = name === userName;
 
+  const condionalStyle = {
+    container: {
+      justifyContent: thisIsMe ? 'flex-end' : 'flex-start',
+    },
+    ViewMessage: {
+      backgroundColor: thisIsMe ? '#f0f0f1' : '#4b86f0',
+    },
+  };
+
   return (
-    <View style={styles.cotainer}>
-      <View style={styles.Vmensagge}>
-        <Text style={styles.mensagge}>{message.text}</Text>
-        <Text>{time}</Text>
+    <View style={(styles.cotainer, condionalStyle.container)}>
+      <View style={(styles.Vmensagge, condionalStyle.ViewMessage)}>
+        <Text style={styles.mensagge}>{text}</Text>
+        <Text style={styles.time}>{time}</Text>
       </View>
     </View>
   );
@@ -34,5 +43,10 @@ const styles = StyleSheet.create({
   mensagge: {
     padding: 5,
     paddingBottom: 25,
+  },
+  time: {
+    fontSize: 10,
+    position: 'absolute',
+    bottom: 5,
   },
 });
