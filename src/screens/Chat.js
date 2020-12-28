@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Header, Body, Title } from 'native-base';
 import Input from '../components/Input';
@@ -12,6 +12,7 @@ export default function Chat(props) {
   const { userName } = props;
 
   const [messages, setMessages] = useState([]);
+  const chatScrollRef = useRef();
 
   useEffect(() => {
     const chat = firebase.database().ref('general');
@@ -20,6 +21,10 @@ export default function Chat(props) {
       setMessages(snapshot.val());
     });
   }, []);
+
+  useEffect(() => {
+    chatScrollRef.current.scrollTo({ y: 1000 });
+  }, [messages]);
 
   const time = moment().format('hh:mm a');
   const sendMessage = (message) => {
@@ -33,7 +38,7 @@ export default function Chat(props) {
         </Body>
       </Header>
       <View style={styles.content}>
-        <ScrollView style={styles.chatView}>
+        <ScrollView style={styles.chatView} ref={chatScrollRef}>
           {map(messages, (message, index) => (
             <Message key={index} message={message} name={userName} />
           ))}
