@@ -19,7 +19,7 @@ export default function Chat(props) {
     chat.on('value', (snapshot) => {
       setMessages(snapshot.val());
     });
-  });
+  }, []);
 
   const time = moment().format('hh:mm a');
   const sendMessage = (message) => {
