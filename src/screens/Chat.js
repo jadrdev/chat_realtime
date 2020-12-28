@@ -23,7 +23,7 @@ export default function Chat(props) {
   }, []);
 
   useEffect(() => {
-    chatScrollRef.current.scrollTo({ y: 1000 });
+    chatScrollRef.current.scrollTo({ y: 1000000000000000000000 });
   }, [messages]);
 
   const time = moment().format('hh:mm a');
