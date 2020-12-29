@@ -17,9 +17,11 @@ export default function Chat(props) {
   useEffect(() => {
     const chat = firebase.database().ref('general');
     //capturamos toda la base de datos
+    const messages = [];
     chat.on('value', (snapshot) => {
-      setMessages(snapshot.val());
+      messages.push(snapshot.val());
     });
+    setMessages(messages);
   }, []);
 
   useEffect(() => {
